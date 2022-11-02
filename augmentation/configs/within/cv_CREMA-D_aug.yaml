@@ -1,0 +1,22 @@
+name: CREMA-D
+data:
+  datasets:
+    CREMA-D:
+      path: datasets/CREMA-D_aug/corpus.yaml
+      subset: CREMA-D_evc
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+  features: datasets/CREMA-D_aug/CREMA-D_evc/wav2vec_c_mean.nc
+model:
+  type: null
+eval:
+  cv:
+    part: speaker
+    kfold: 10
+  inner_kfold: 2
+  inner_part: speaker

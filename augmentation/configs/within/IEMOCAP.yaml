@@ -1,0 +1,19 @@
+name: IEMOCAP_4class
+data:
+  datasets:
+    IEMOCAP:
+      path: ../emotion/datasets/IEMOCAP/corpus.yaml
+      subset: 4class
+  map_groups:
+    label:
+      map:
+        excitement: happiness
+  features: wav2vec_c_mean
+model:
+  type: null
+eval:
+  cv:
+    part: session
+    kfold: -1
+  inner_kfold: 2
+  inner_part: session

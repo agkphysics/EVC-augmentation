@@ -1,0 +1,81 @@
+data:
+  datasets:
+    CREMA-D:
+      path: ../emotion/datasets/CREMA-D/corpus.yaml
+    EmoV-DB:
+      path: ../emotion/datasets/EmoV-DB/corpus_evc.yaml
+      map_groups:
+        label:
+          map:
+            amusement: happiness
+  features: wav2vec_c_mean
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+aug_data:
+  datasets:
+    CREMA-D:
+      path: datasets/CREMA-D_aug/corpus.yaml
+      subset: CREMA-D_evc
+      remove_groups:
+        speaker:
+          drop: ["1014", "1021", "1026", "1043", "1052", "1056", "1061", "1070", "1084", "1088"]
+      features: datasets/CREMA-D_aug/${aug_data.datasets.CREMA-D.subset}/${data.features}.nc
+    EmoV-DB:
+      path: datasets/EmoV-DB_aug/corpus.yaml
+      subset: EmoV-DB_evc
+      remove_groups:
+        evc_subset:
+          keep:
+          - train
+      features: datasets/EmoV-DB_aug/${aug_data.datasets.EmoV-DB.subset}/${data.features}.nc
+  map_groups:
+    label:
+      map:
+        amusement: happiness
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+model:
+  type: null
+evals:
+  EmoV-DB:
+    train:
+      groups:
+        corpus:
+          keep:
+          - CREMA-D
+        speaker:
+          drop: ["CREMA-D_1014", "CREMA-D_1021", "CREMA-D_1026", "CREMA-D_1043", "CREMA-D_1052", "CREMA-D_1056", "CREMA-D_1061", "CREMA-D_1070", "CREMA-D_1084", "CREMA-D_1088"]
+    test:
+      groups:
+        corpus:
+          keep:
+          - EmoV-DB
+        evc_subset:
+          drop:
+          - train
+  CREMA-D:
+    train:
+      groups:
+        corpus:
+          keep:
+          - EmoV-DB
+        evc_subset:
+          keep:
+          - train
+    test:
+      groups:
+        corpus:
+          keep:
+          - CREMA-D
+        speaker:
+          keep: ["CREMA-D_1014", "CREMA-D_1021", "CREMA-D_1026", "CREMA-D_1043", "CREMA-D_1052", "CREMA-D_1056", "CREMA-D_1061", "CREMA-D_1070", "CREMA-D_1084", "CREMA-D_1088"]

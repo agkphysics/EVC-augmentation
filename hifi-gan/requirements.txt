@@ -1,0 +1,7 @@
+torch
+numpy
+librosa
+scipy
+tensorboard
+soundfile
+matplotlib

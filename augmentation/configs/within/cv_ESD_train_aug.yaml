@@ -1,0 +1,14 @@
+data:
+  datasets:
+    ESD:
+      path: datasets/ESD_aug/corpus.yaml
+      subset: ESD_en_evc
+  features: datasets/ESD_aug/ESD_en_evc/wav2vec_c_mean.nc
+model:
+  type: null
+eval:
+  cv:
+    kfold: 10
+    part: speaker
+  inner_part: speaker
+  inner_kfold: 2

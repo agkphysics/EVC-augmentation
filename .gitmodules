@@ -1,0 +1,3 @@
+[submodule "emotion"]
+	path = emotion
+	url = https://github.com/Strong-AI-Lab/emotion.git

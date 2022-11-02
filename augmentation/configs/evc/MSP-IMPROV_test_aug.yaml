@@ -1,0 +1,46 @@
+data:
+  datasets:
+    MSP-IMROV:
+      path: ../emotion/datasets/MSP-IMPROV/corpus.yaml
+      map_groups:
+        label:
+          map:
+            excitement: happiness
+  features: wav2vec_c_mean
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+aug_data:
+  datasets:
+    MSP-IMPROV:
+      path: datasets/MSP-IMPROV_aug/corpus.yaml
+      subset: MSP-IMPROV_evc
+      remove_groups:
+        session:
+          drop:
+          - "06"
+  features: datasets/MSP-IMPROV_aug/${aug_data.datasets.MSP-IMPROV.subset}/${data.features}.nc
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+model:
+  type: null
+eval:
+  train:
+    groups:
+      session:
+        drop:
+        - "06"
+  test:
+    groups:
+      session:
+        keep:
+        - "06"

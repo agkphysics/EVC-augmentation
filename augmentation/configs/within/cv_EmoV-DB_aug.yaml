@@ -1,0 +1,26 @@
+name: EmoV-DB
+data:
+  datasets:
+    EmoV-DB:
+      path: datasets/EmoV-DB_aug/corpus.yaml
+      subset: EmoV-DB_evc
+  map_groups:
+    label:
+      map:
+        amusement: happiness
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+  features: datasets/EmoV-DB_aug/EmoV-DB_evc/wav2vec_c_mean.nc
+model:
+  type: null
+eval:
+  cv:
+    part: speaker
+    kfold: -1
+  inner_kfold: -1
+  inner_part: speaker

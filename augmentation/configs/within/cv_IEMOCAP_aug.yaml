@@ -1,0 +1,26 @@
+name: IEMOCAP_4class
+data:
+  datasets:
+    IEMOCAP:
+      path: datasets/IEMOCAP_aug/corpus.yaml
+      subset: IEMOCAP_evc
+  map_groups:
+    label:
+      map:
+        excitement: happiness
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+  features: datasets/IEMOCAP_aug/IEMOCAP_evc/wav2vec_c_mean.nc
+model:
+  type: null
+eval:
+  cv:
+    part: session
+    kfold: -1
+  inner_kfold: 2
+  inner_part: session

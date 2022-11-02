@@ -1,0 +1,46 @@
+data:
+  datasets:
+    IEMOCAP:
+      path: ../emotion/datasets/IEMOCAP/corpus.yaml
+      map_groups:
+        label:
+          map:
+            excitement: happiness
+  features: wav2vec_c_mean
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+aug_data:
+  datasets:
+    IEMOCAP:
+      path: datasets/IEMOCAP_aug/corpus.yaml
+      subset: IEMOCAP_evc
+      remove_groups:
+        session:
+          drop:
+          - "05"
+  features: datasets/IEMOCAP_aug/${aug_data.datasets.IEMOCAP.subset}/${data.features}.nc
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+model:
+  type: null
+eval:
+  train:
+    groups:
+      session:
+        drop:
+        - "05"
+  test:
+    groups:
+      session:
+        keep:
+        - "05"

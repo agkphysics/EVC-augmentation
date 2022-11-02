@@ -1,0 +1,10 @@
+torch
+numpy
+tensorboardX
+matplotlib
+librosa
+Pillow
+git+https://github.com/Strong-AI-Lab/emotion.git
+omegaconf
+pingouin
+seaborn

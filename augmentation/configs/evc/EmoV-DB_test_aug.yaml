@@ -1,0 +1,36 @@
+data:
+  datasets:
+    CREMA-D:
+      path: ../emotion/datasets/EmoV-DB/corpus_evc.yaml
+  features: wav2vec_c_mean
+  map_groups:
+    label:
+      map:
+        amusement: happiness
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+aug_data:
+  datasets:
+    EmoV-DB:
+      path: datasets/EmoV-DB_aug/corpus.yaml
+      subset: evc_train
+      features: datasets/EmoV-DB_aug/EmoV-DB_evc/${data.features}.nc
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+model:
+  type: null
+eval:
+  train:
+    subset: train
+  test:
+    subset: valid

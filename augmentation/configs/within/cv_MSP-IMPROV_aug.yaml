@@ -1,0 +1,22 @@
+name: MSP-IMPROV_4class
+data:
+  datasets:
+    MSP-IMPROV:
+      path: datasets/MSP-IMPROV_aug/corpus.yaml
+      subset: MSP-IMPROV_evc
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+  features: datasets/MSP-IMPROV_aug/MSP-IMPROV_evc/wav2vec_c_mean.nc
+model:
+  type: null
+eval:
+  cv:
+    part: session
+    kfold: -1
+  inner_kfold: 2
+  inner_part: session

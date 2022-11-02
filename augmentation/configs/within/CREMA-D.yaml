@@ -1,0 +1,21 @@
+name: CREMA-D
+data:
+  datasets:
+    CREMA-D:
+      path: ../emotion/datasets/CREMA-D/corpus.yaml
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - disgust
+      - neutral
+  features: wav2vec_c_mean
+model:
+  type: null
+eval:
+  cv:
+    part: speaker
+    kfold: 10
+  inner_kfold: 2
+  inner_part: speaker

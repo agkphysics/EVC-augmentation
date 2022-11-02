@@ -1,0 +1,80 @@
+data:
+  datasets:
+    IEMOCAP:
+      path: ../emotion/datasets/IEMOCAP/corpus.yaml
+      map_groups:
+        label:
+          map:
+            excitement: happiness
+    MSP-IMPROV:
+      path: ../emotion/datasets/MSP-IMPROV/corpus.yaml
+  features: wav2vec_c_mean
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+aug_data:
+  datasets:
+    IEMOCAP:
+      path: datasets/IEMOCAP_aug/corpus.yaml
+      subset: IEMOCAP_evc
+      features: datasets/IEMOCAP_aug/${aug_data.datasets.IEMOCAP.subset}/${data.features}.nc
+      remove_groups:
+        session:
+          drop:
+          - "05"
+    MSP-IMPROV:
+      path: datasets/MSP-IMPROV_aug/corpus.yaml
+      subset: IEMOCAP_evc
+      features: datasets/MSP-IMPROV_aug/${aug_data.datasets.MSP-IMPROV.subset}/${data.features}.nc
+      remove_groups:
+        session:
+          drop:
+          - "06"
+  remove_groups:
+    label:
+      keep:
+      - anger
+      - happiness
+      - sadness
+      - neutral
+model:
+  type: null
+evals:
+  MSP-IMPROV:
+    train:
+      groups:
+        corpus:
+          keep:
+          - IEMOCAP
+        session:
+          drop:
+          - "05"
+    test:
+      groups:
+        corpus:
+          keep:
+          - MSP-IMPROV
+        session:
+          keep:
+          - "06"
+  IEMOCAP:
+    train:
+      groups:
+        corpus:
+          keep:
+          - MSP-IMPROV
+        session:
+          drop:
+          - "06"
+    test:
+      groups:
+        corpus:
+          keep:
+          - IEMOCAP
+        session:
+          keep:
+          - "05"

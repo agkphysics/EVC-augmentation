@@ -1,0 +1,28 @@
+name: esd_train
+data:
+  datasets:
+    ESD:
+      path: ../emotion/datasets/ESD/corpus.yaml
+      subset: train
+  features: wav2vec_c_mean
+model:
+  type: null
+eval:
+  cv:
+    kfold: 10
+    part: speaker
+  inner_kfold: 2
+  inner_part: speaker
+evals:
+  en:
+    cv:
+      kfold: 10
+      part: speaker
+    inner_kfold: 2
+    inner_part: speaker
+  zh:
+    cv:
+      kfold: 10
+      part: speaker
+    inner_kfold: 2
+    inner_part: speaker

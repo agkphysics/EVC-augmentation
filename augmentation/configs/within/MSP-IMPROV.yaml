@@ -1,0 +1,15 @@
+name: MSP-IMPROV_4class
+data:
+  datasets:
+    MSP-IMPROV:
+      path: ../emotion/datasets/MSP-IMPROV/corpus.yaml
+      subset: 4class
+  features: wav2vec_c_mean
+model:
+  type: null
+eval:
+  cv:
+    part: session
+    kfold: -1
+  inner_kfold: 2
+  inner_part: session

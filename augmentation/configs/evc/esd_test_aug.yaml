@@ -1,0 +1,58 @@
+data:
+  datasets:
+    ESD:
+      path: ../emotion/datasets/ESD/corpus.yaml
+      subset: all
+  features: wav2vec_c_mean
+aug_data:
+  datasets:
+    aug:
+      path: datasets/ESD_aug/corpus.yaml
+      subset: ESD_en_evc
+  remove_groups:
+    language:
+      keep:
+      - zh
+  features: datasets/ESD_aug/ESD_en_evc/${data.features}.nc
+model:
+  type: null
+eval:
+  train:
+    subset: train
+    groups:
+      language:
+        keep:
+        - en
+  test:
+    subset: test
+    groups:
+      language:
+        keep:
+        - zh
+evals:
+  zh:
+    train:
+      subset: train
+      groups:
+        language:
+          keep:
+          - en
+    test:
+      subset: test
+      groups:
+        language:
+          keep:
+          - zh
+  en:
+    train:
+      subset: train
+      groups:
+        language:
+          keep:
+          - zh
+    test:
+      subset: test
+      groups:
+        language:
+          keep:
+          - en
